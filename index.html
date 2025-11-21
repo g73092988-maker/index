@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>مرحله ۳ — اشتراک مجموعه‌ها (A ∩ B) — نسخه کامل آموزشی</title>
+
+<!-- 
+========================================================
+      فایل کامل آموزشی + بازی تعاملی اشتراک A ∩ B
+      شامل توضیحات ریاضی، مثال‌ها، قوانین و کدنویسی
+========================================================
+-->
+
+<style>
+/* ----------- استایل کلی صفحه ----------- */
+body{
+  margin:0; padding:0;
+  font-family: sans-serif;
+  background:#0b0e1d;
+  color:#e8fefe;
+  text-align:center;
+  line-height:1.8;
+}
+h1{ color:#6ff1ff; margin-top:20px; }
+h2{ color:#ffe680; }
+
+/* ----------- باکس توضیح ریاضی ----------- */
+#math-box{
+  width:70%;
+  margin:20px auto;
+  background:#121b2d;
+  padding:20px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.08);
+  text-align:right;
+  font-size:18px;
+}
+
+/* ----------- سینی کارت‌ها ----------- */
+#tray{
+  margin-top:30px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.card{
+  background:#1b2537;
+  padding:12px 18px;
+  border-radius:20px;
+  font-size:22px;
+  font-weight:bold;
+  cursor:grab;
+  border:1px solid rgba(255,255,255,0.1);
+  color:#dffcff;
+}
+.card:active{ cursor:grabbing; transform:scale(.95); }
+
+/* ----------- نمودار وِن ----------- */
+.ven-area{
+  position:relative;
+  width:540px;
+  height:330px;
+  margin:40px auto;
+}
+
+.circle{
+  position:absolute;
+  width:260px; height:260px;
+  border-radius:50%;
+  top:40px;
+  background:rgba(130,180,255,0.16);
+  border:2px solid rgba(140,200,255,0.25);
+}
+#A{ left:60px; }
+#B{ right:60px; }
+
+/* برچسب مجموعه */
+.label{
+  position:absolute;
+  top:10px;
+  font-size:22px;
+  font-weight:bold;
+  color:#ffd86b;
+}
+
+/* ----------- ناحیه اشتراک ----------- */
+#intersection{
+  position:absolute;
+  width:180px; height:180px;
+  border-radius:50%;
+  top:85px; left:180px;
+  background:rgba(0,255,200,0.15);
+  border:2px dashed rgba(0,255,200,0.35);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+}
+#intersection.highlight{
+  box-shadow:0 0 20px #68ffd5aa;
+  transform:scale(1.04);
+}
+
+/* کارت‌های داخل اشتراک */
+.placed{
+  background:#133028;
+  padding:10px 14px;
+  margin:4px;
+  border-radius:12px;
+  color:#bfffe8;
+  font-size:20px;
+  font-weight:bold;
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+/* خطا */
+.shake{
+  animation:shake .4s;
+}
+@keyframes shake{
+  0%{ transform:translateX(0); }
+  25%{ transform:translateX(-8px); }
+  50%{ transform:translateX(8px); }
+  75%{ transform:translateX(-8px); }
+  100%{ transform:translateX(0); }
+}
+
+/* نتیجه */
+#result{
+  margin-top:16px;
+  color:#ffda88;
+  font-size:22px;
+  font-weight:bold;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===========================
+        عنوان
+============================= -->
+<h1>مرحله ۳ — اشتراک مجموعه‌ها (A ∩ B)</h1>
+<div>آزمایشگاه مجازی ریاضی — آموزش + بازی</div>
+
+
+<!-- ===========================
+        توضیح ریاضی
+============================= -->
+<div id="math-box">
+  <h2>📘 مفهوم اشتراک A ∩ B</h2>
+
+  اشتراک دو مجموعهٔ <b>A</b> و <b>B</b> به معنی:
+  <br>
+  <b>عناصر مشترک هر دو مجموعه</b>
+  <br><br>
+
+  یعنی عضوی که هم عضو A باشد و هم عضو B.
+  <br><br>
+
+  <b>به‌صورت ریاضی:</b>
+  <pre style="background:#0d1426; padding:10px; border-radius:8px;">
+A ∩ B = { x | x ∈ A  و  x ∈ B }
+  </pre>
+
+  <h2>مثال انتخاب‌شده در این مرحله</h2>
+  مجموعه‌ها به این صورت تعریف شده‌اند:
+
+  <ul>
+    <li><b>A:</b> اعداد بزرگ‌تر از ۲ →   A = { ۳ ، ۴ ، ۵ ، ۶ }</li>
+    <li><b>B:</b> اعداد زوج →  B = { ۲ ، ۴ ، ۶ }</li>
+  </ul>
+
+  بنابراین اشتراک:
+
+  <pre style="background:#0d1426; padding:10px; border-radius:8px;">
+A ∩ B = { ۴ ، ۶ }
+  </pre>
+
+  <br>
+  🎮 حالا باید کارت‌هایی که <b>هم بزرگ‌تر از ۲ هستند و هم زوج هستند</b> را در ناحیهٔ اشتراک رها کنی.
+</div>
+
+
+<!-- ===========================
+        سینی کارت‌ها
+============================= -->
+<h2>🎴 کارت‌ها را بکش و رها کن</h2>
+
+<div id="tray">
+  <div class="card" draggable="true" data-value="1">۱</div>
+  <div class="card" draggable="true" data-value="2">۲</div>
+  <div class="card" draggable="true" data-value="3">۳</div>
+  <div class="card" draggable="true" data-value="4">۴</div>
+  <div class="card" draggable="true" data-value="5">۵</div>
+  <div class="card" draggable="true" data-value="6">۶</div>
+</div>
+
+
+<!-- ===========================
+        نمودار وِن
+============================= -->
+<div class="ven-area">
+
+  <div class="circle" id="A"></div>
+  <div class="circle" id="B"></div>
+
+  <div class="label" style="left:120px;">A</div>
+  <div class="label" style="right:120px;">B</div>
+
+  <!-- ناحیه اشتراک -->
+  <div id="intersection"></div>
+</div>
+
+
+<!-- نتیجه اشتراک -->
+<div id="result">A ∩ B = { }</div>
+
+
+<!-- ===========================
+       کد جاوااسکریپت
+============================= -->
+<script>
+// تبدیل عدد انگلیسی به فارسی
+function toPersian(n){
+  return String(n).replace(/[0-9]/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+}
+
+// تعریف قوانین مجموعه‌ها
+function ruleA(v){ return v > 2; }   // عدد بزرگ‌تر از ۲
+function ruleB(v){ return v % 2 === 0; } // عدد زوج
+
+function acceptable(v){
+  return ruleA(v) && ruleB(v);
+}
+
+const tray = document.getElementById("tray");
+const intersection = document.getElementById("intersection");
+const result = document.getElementById("result");
+
+/* درگ کارت‌ها */
+document.querySelectorAll(".card").forEach(card=>{
+  card.addEventListener("dragstart", e=>{
+    e.dataTransfer.setData("value", card.dataset.value);
+    card.classList.add("dragging");
+  });
+  card.addEventListener("dragend", ()=> card.classList.remove("dragging"));
+});
+
+/* ورود به ناحیه اشتراک */
+intersection.addEventListener("dragover", e=> e.preventDefault());
+intersection.addEventListener("dragenter", ()=> intersection.classList.add("highlight"));
+intersection.addEventListener("dragleave", ()=> intersection.classList.remove("highlight"));
+
+/* رها کردن داخل اشتراک */
+intersection.addEventListener("drop", e=>{
+  e.preventDefault();
+  intersection.classList.remove("highlight");
+
+  const value = Number(e.dataTransfer.getData("value"));
+
+  // اگر عضو اشتراک نبود → خطا
+  if(!acceptable(value)){
+    intersection.classList.add("shake");
+    setTimeout(()=> intersection.classList.remove("shake"),400);
+    return;
+  }
+
+  // حذف کارت از سینی
+  const card = document.querySelector(`.card[data-value="${value}"]`);
+  if(card) card.remove();
+
+  // ساخت کارت داخل اشتراک
+  const placed = document.createElement("div");
+  placed.className = "placed";
+  placed.textContent = toPersian(value);
+  placed.dataset.value = value;
+  intersection.appendChild(placed);
+
+  updateResult();
+});
+
+/* بروزرسانی آکولاد اشتراک */
+function updateResult(){
+  const items = [...intersection.querySelectorAll(".placed")]
+                .map(el => el.dataset.value);
+
+  if(items.length === 0){
+    result.textContent = "A ∩ B = { }";
+    return;
+  }
+
+  const persianList = items.map(v => toPersian(v));
+  result.textContent = "A ∩ B = { " + persianList.join(" ، ") + " }";
+}
+
+</script>
+
+</body>
+</html>
