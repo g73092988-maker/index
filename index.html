@@ -4,13 +4,6 @@
 <meta charset="UTF-8">
 <title>مرحله ۳ — اشتراک مجموعه‌ها (A ∩ B) — نسخه کامل آموزشی</title>
 
-<!-- 
-========================================================
-      فایل کامل آموزشی + بازی تعاملی اشتراک A ∩ B
-      شامل توضیحات ریاضی، مثال‌ها، قوانین و کدنویسی
-========================================================
--->
-
 <style>
 /* ----------- استایل کلی صفحه ----------- */
 body{
@@ -34,6 +27,24 @@ h2{ color:#ffe680; }
   border:1px solid rgba(255,255,255,0.08);
   text-align:right;
   font-size:18px;
+}
+
+/* ----------- فرمول زیبا ----------- */
+.formula{
+  margin:16px auto 6px;
+  display:inline-block;
+  background:linear-gradient(180deg,#081422 0%, #0f1b2a 100%);
+  padding:12px 18px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.06);
+  font-size:22px;
+  color:#dffcff;
+  direction: rtl;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+.formula .math{
+  font-weight:700;
+  color:#ffd86b;
 }
 
 /* ----------- سینی کارت‌ها ----------- */
@@ -159,24 +170,24 @@ h2{ color:#ffe680; }
   یعنی عضوی که هم عضو A باشد و هم عضو B.
   <br><br>
 
-  <b>به‌صورت ریاضی:</b>
-  <pre style="background:#0d1426; padding:10px; border-radius:8px;">
-A ∩ B = { x | x ∈ A  و  x ∈ B }
-  </pre>
+  <!-- فرمول اصلاح شده و جایگزینِ بلاک pre قبلی -->
+  <div class="formula" aria-label="فرمول اشتراک">
+    <span class="math">A ∩ B = { x | x ∈ A and x ∈ B }</span>
+  </div>
 
   <h2>مثال انتخاب‌شده در این مرحله</h2>
   مجموعه‌ها به این صورت تعریف شده‌اند:
 
-  <ul>
+  <ul style="text-align:right;">
     <li><b>A:</b> اعداد بزرگ‌تر از ۲ →   A = { ۳ ، ۴ ، ۵ ، ۶ }</li>
     <li><b>B:</b> اعداد زوج →  B = { ۲ ، ۴ ، ۶ }</li>
   </ul>
 
   بنابراین اشتراک:
 
-  <pre style="background:#0d1426; padding:10px; border-radius:8px;">
-A ∩ B = { ۴ ، ۶ }
-  </pre>
+  <div class="formula" style="margin-top:12px;">
+    <span class="math">A ∩ B = { ۴ ، ۶ }</span>
+  </div>
 
   <br>
   🎮 حالا باید کارت‌هایی که <b>هم بزرگ‌تر از ۲ هستند و هم زوج هستند</b> را در ناحیهٔ اشتراک رها کنی.
@@ -271,6 +282,9 @@ intersection.addEventListener("drop", e=>{
   const card = document.querySelector(`.card[data-value="${value}"]`);
   if(card) card.remove();
 
+  // جلوگیری از اضافه شدن تکراری
+  if(intersection.querySelector(`.placed[data-value="${value}"]`)) return;
+
   // ساخت کارت داخل اشتراک
   const placed = document.createElement("div");
   placed.className = "placed";
@@ -299,5 +313,3 @@ function updateResult(){
 
 </body>
 </html>
-
-
